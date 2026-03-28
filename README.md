@@ -2,9 +2,6 @@
  * @@Descripttion: lanhuazhiyue于2026年3月28日更新了部分说明
  * @@version: 
  * @@encoding: utf-8
- * @@Author: qiurongcan
- * @Date: 2025-12-04 09:25:24
- * @LastEditTime: 2025-12-04 15:57:38
 -->
 
 # Livox MID360 + IMU仿真 可用于Fast LIO
@@ -50,12 +47,12 @@ roslaunch livox_ros_driver2 [launch file]
 
 **克隆仓库并编译, 注意这个功能包和`livox_ros_driver2`放在一个工作空间下，如果不在一个空间编译会报错**
 ```shell
-cd ~/catkin_ws/src
-git clone -b Custom https://github.com/qiurongcan/Mid360_imu_sim.git
+cd ~/ws_livox/src
+git clone git@github.com:lanhuazhiyue/livox_laser_simulation_Mid360.git
 cd ..
 catkin_make
 ```
-编译成功会在 catkin_ws/devel/lib文件夹下生成*liblivox_laser_simulation.so*文件，gazebo中能出现点云都依赖于此链接库
+编译成功会在 ws_livox/devel/lib文件夹下生成*liblivox_laser_simulation.so*文件，gazebo中能出现点云都依赖于此链接库
 > 相比于官方仿真库，原作者主要1. 在meshes文件夹加入了*mid360.dae</u>和<u>mid360_rules.dae*两个文件分别用于外形显示和碰撞检测； 2. 修改了urdf文件夹中*livox_mid360.xacro*文件的内容； 新增了urdf文件夹中*mid360_IMU_platform.xacro*文件; 3. 修改了src文件夹下*livox_points_plugin.cpp*文件内的部分代码，让点云的输出类型从PointCloud -> PointCloud2 -> livox_ros_drive2.CustomMsg，从而可以供给fast-lio直接使用
 **运行代码**
 ```shell
