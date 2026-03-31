@@ -54,6 +54,12 @@ catkin_make
 ```
 编译成功会在 ws_livox/devel/lib文件夹下生成*liblivox_laser_simulation.so*文件，gazebo中能出现点云都依赖于此链接库
 > 相比于官方仿真库，原作者主要1. 在meshes文件夹加入了*mid360.dae</u>和<u>mid360_rules.dae*两个文件分别用于外形显示和碰撞检测； 2. 修改了urdf文件夹中*livox_mid360.xacro*文件的内容； 新增了urdf文件夹中*mid360_IMU_platform.xacro*文件; 3. 修改了src文件夹下*livox_points_plugin.cpp*文件内的部分代码，让点云的输出类型从PointCloud -> PointCloud2 -> livox_ros_drive2.CustomMsg，从而可以供给fast-lio直接使用
+> 相比于原作者，根据github上面的issue将*/src/livox_points_plugin.cpp*中关于minDist的定义强行赋值为0了，避免在碰撞检测阶段就“扭曲”近距离的射线，最后的输出仍然按用户设定值来输出。
+```cpp
+// minDist = rangeElem->Get<double>("min");
+minDist = 0.0
+```
+
 **运行代码**
 ```shell
 roslaunch livox_laser_simulation mid360_IMU_platform.launch

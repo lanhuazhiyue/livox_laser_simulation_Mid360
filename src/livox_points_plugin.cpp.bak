@@ -108,8 +108,7 @@ void LivoxPointsPlugin::Load(gazebo::sensors::SensorPtr _parent, sdf::ElementPtr
     rayShape->RayShapes().reserve(samplesStep / downSample);
     rayShape->Load(sdfPtr);
     rayShape->Init();
-    // minDist = rangeElem->Get<double>("min");
-    minDist = 0.0;
+    minDist = rangeElem->Get<double>("min");
     maxDist = rangeElem->Get<double>("max");
     auto offset = laserCollision->RelativePose();
     ignition::math::Vector3d start_point, end_point;
